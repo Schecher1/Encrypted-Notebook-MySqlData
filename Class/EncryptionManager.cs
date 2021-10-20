@@ -33,7 +33,7 @@ namespace Encrypted_Notebook.Class
             // Hash the password with SHA256
             passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
 
-            byte[] bytesEncrypted = AES_Encrypt(bytesToBeEncrypted, passwordBytes);
+            byte[] bytesEncrypted = AES256_Encrypt(bytesToBeEncrypted, passwordBytes);
 
             string result = Convert.ToBase64String(bytesEncrypted);
 
@@ -46,14 +46,14 @@ namespace Encrypted_Notebook.Class
             byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
             passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
 
-            byte[] bytesDecrypted = AES_Decrypt(bytesToBeDecrypted, passwordBytes);
+            byte[] bytesDecrypted = AES256_Decrypt(bytesToBeDecrypted, passwordBytes);
 
             string result = Encoding.UTF8.GetString(bytesDecrypted);
 
             return result;
         }
 
-        private byte[] AES_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
+        private byte[] AES256_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
         {
             byte[] encryptedBytes = null;
 
@@ -85,7 +85,7 @@ namespace Encrypted_Notebook.Class
 
             return encryptedBytes;
         }
-        private byte[] AES_Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes)
+        private byte[] AES256_Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes)
         {
                 byte[] decryptedBytes = null;
 

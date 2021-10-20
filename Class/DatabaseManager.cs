@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Encrypted_Notebook.Resources;
+using System.Net;
 
 namespace Encrypted_Notebook.Class
 {
@@ -101,7 +102,7 @@ namespace Encrypted_Notebook.Class
 
                 UserInfoManager.userName = userName.ToLower();
                 UserInfoManager.userID = Convert.ToInt32(cmd.ExecuteScalar());
-                UserInfoManager.userPassword = userPassword; //ÄNDERN
+                UserInfoManager.userPassword = new NetworkCredential("", userPassword).SecurePassword;
                 return true;
             }  
             else
@@ -138,13 +139,20 @@ namespace Encrypted_Notebook.Class
 
         public void writeNotes(string notes)
         {
-            cmd.CommandText = ($"UPDATE `notebooks from {UserInfoManager.userName}` SET `notebook_Value` = '{notes}' WHERE (`notebook_Name` = '{UserInfoManager.userActivNotebook}');");
+            if (notes != "" || notes != null)
+                cmd.CommandText = ($"UPDATE `notebooks from {UserInfoManager.userName}` SET `notebook_Value` = '{EMgr.EncryptAES256Salt(notes, new NetworkCredential("", UserInfoManager.userPassword).Password)}' WHERE (`notebook_Name` = '{UserInfoManager.userActivNotebook}');");
+            else
+                cmd.CommandText = ($"UPDATE `notebooks from {UserInfoManager.userName}` SET `notebook_Value` = '{notes}' WHERE (`notebook_Name` = '{UserInfoManager.userActivNotebook}');");
             cmd.ExecuteNonQuery();
         }
         public string readNotes()
         {
             cmd.CommandText = ($"SELECT notebook_Value FROM `notebooks from {UserInfoManager.userName}` where (notebook_Name = '{UserInfoManager.userActivNotebook}');");
-            return cmd.ExecuteScalar().ToString();
+            string notes = cmd.ExecuteScalar().ToString();
+            if (notes == "" || notes == null)
+                return notes;
+            else
+                return EMgr.DecryptAES256Salt(notes, new NetworkCredential("", UserInfoManager.userPassword).Password);
         }
     }
 }

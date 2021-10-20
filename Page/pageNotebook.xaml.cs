@@ -73,6 +73,7 @@ namespace Encrypted_Notebook.Page
             UserInfoManager.userName = null;
             UserInfoManager.userActivNotebook = null;
             UserInfoManager.userID = -1;
+            UserInfoManager.userPassword.Clear();
             tb_notes.Text = "";
             lb_notebooks.Items.Clear();
 
