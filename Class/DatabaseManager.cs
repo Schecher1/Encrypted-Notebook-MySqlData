@@ -117,23 +117,23 @@ namespace Encrypted_Notebook.Class
             
             reader = cmd.ExecuteReader();
             while (reader.Read())
-                Notebooks.Add(reader["notebook_Name"].ToString());
+                Notebooks.Add(EMgr.DecryptAES256Salt((reader["notebook_Name"].ToString()), new NetworkCredential("", UserInfoManager.userPassword).Password));
             reader.Close();
 
             return Notebooks;
         }
         public void createNotebook(string notebookName)
         {
-            cmd.CommandText = ($"SELECT notebook_Name FROM `notebooks from {UserInfoManager.userName}` WHERE (notebook_Name = '{notebookName}');");
+            cmd.CommandText = ($"SELECT notebook_Name FROM `notebooks from {UserInfoManager.userName}` WHERE (notebook_Name = '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password)}');");
             if (cmd.ExecuteScalar() == null)
             {
-                cmd.CommandText = ($"INSERT INTO `notebooks from {UserInfoManager.userName}` (`notebook_Name`) VALUES ('{notebookName}');");
+                cmd.CommandText = ($"INSERT INTO `notebooks from {UserInfoManager.userName}` (`notebook_Name`) VALUES ('{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password)}');");
                 cmd.ExecuteNonQuery();
             }
         }
         public void deleteNotebook(string notebookName)
         {
-            cmd.CommandText = ($"DELETE FROM `notebooks from {UserInfoManager.userName}` WHERE (`notebook_Name` = '{notebookName}');");
+            cmd.CommandText = ($"DELETE FROM `notebooks from {UserInfoManager.userName}` WHERE (`notebook_Name` = '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password)}');");
             cmd.ExecuteNonQuery();
         }
 
@@ -147,12 +147,16 @@ namespace Encrypted_Notebook.Class
         }
         public string readNotes()
         {
-            cmd.CommandText = ($"SELECT notebook_Value FROM `notebooks from {UserInfoManager.userName}` where (notebook_Name = '{UserInfoManager.userActivNotebook}');");
-            string notes = cmd.ExecuteScalar().ToString();
-            if (notes == "" || notes == null)
-                return notes;
-            else
-                return EMgr.DecryptAES256Salt(notes, new NetworkCredential("", UserInfoManager.userPassword).Password);
+            try
+            {
+                cmd.CommandText = ($"SELECT notebook_Value FROM `notebooks from {UserInfoManager.userName}` where (notebook_Name = '{UserInfoManager.userActivNotebook}');");
+                string notes = cmd.ExecuteScalar().ToString();
+                if (notes == "" || notes == null)
+                    return notes;
+                else
+                    return EMgr.DecryptAES256Salt(notes, new NetworkCredential("", UserInfoManager.userPassword).Password);
+            }
+            catch { return ""; }
         }
     }
 }

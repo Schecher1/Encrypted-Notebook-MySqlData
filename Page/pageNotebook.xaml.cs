@@ -1,5 +1,6 @@
 ﻿using Encrypted_Notebook.Class;
 using System.Collections.Generic;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,6 +10,7 @@ namespace Encrypted_Notebook.Page
     {
         MainWindow mw = (MainWindow)Application.Current.MainWindow;
         DatabaseManager DBMgr = new DatabaseManager();
+        EncryptionManager EMgr = new EncryptionManager();
 
         public pageNotebook()
         {
@@ -37,7 +39,7 @@ namespace Encrypted_Notebook.Page
             }
             else
             {
-                UserInfoManager.userActivNotebook = lb_notebooks.SelectedItem.ToString();
+                UserInfoManager.userActivNotebook = EMgr.EncryptAES256Salt(lb_notebooks.SelectedItem.ToString(), new NetworkCredential("", UserInfoManager.userPassword).Password);
                 tb_notes.Text = DBMgr.readNotes();
             }
         }
