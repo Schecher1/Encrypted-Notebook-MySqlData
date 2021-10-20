@@ -1,0 +1,5 @@
+﻿` (
+  `notebook_ID` INT NOT NULL AUTO_INCREMENT,
+  `notebook_Name` VARCHAR(255) NOT NULL,
+  `notebook_Value` LONGTEXT NULL,
+  PRIMARY KEY (`notebook_ID`));

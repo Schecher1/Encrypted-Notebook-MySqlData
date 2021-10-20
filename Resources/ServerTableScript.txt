@@ -1,0 +1,15 @@
+﻿CREATE TABLE user (
+  `user_ID` INT NOT NULL AUTO_INCREMENT,
+  `user_Username` VARCHAR(255) NULL,
+  `user_Password` LONGTEXT NULL,
+  PRIMARY KEY (`user_ID`));
+
+CREATE TABLE setting (
+  `setting_ID` INT NOT NULL AUTO_INCREMENT,
+  `setting_Name` VARCHAR(255) NULL,
+  `setting_Value` LONGTEXT NULL,
+  PRIMARY KEY (`setting_ID`));
+
+INSERT INTO setting (
+`setting_Name`, `setting_Value`) 
+VALUES ('IsConfigured', '1');

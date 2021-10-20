@@ -1,0 +1,21 @@
+﻿<Page x:Class="Encrypted_Notebook.Page.pageDatabase404"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Encrypted_Notebook.Page"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="800"
+      Title="pageDatabase404">
+
+    <Grid>
+        <Frame Content="" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" VerticalAlignment="Top" Width="250" RenderTransformOrigin="0.25,0.25">
+            <Frame.Background>
+                <ImageBrush ImageSource="/Encrypted Notebook;component/Resources/error.png"/>
+            </Frame.Background>
+        </Frame>
+        <Button Content="Back to Home" HorizontalAlignment="Center" Margin="0,0,0,25" VerticalAlignment="Bottom" Width="220" Height="65" Background="#B2494949" BorderBrush="#00707070" Foreground="White" FontSize="30" FontWeight="Bold"/>
+        <TextBox x:Name="msgBox_error_Copy" HorizontalAlignment="Center" Margin="25,360,25,300" TextWrapping="Wrap" Text="The database could not be found, please make sure you have a connection to your database. And that the login data is correct! If necessary check if the server is online, if not please start the server" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="#00ABADB3" Foreground="White" FontSize="25" Height="140" Width="780" IsReadOnly="True"/>
+
+    </Grid>
+</Page>
