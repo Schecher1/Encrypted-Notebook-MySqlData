@@ -212,6 +212,7 @@
     <Resource Include="Resources\UserTableScript-Start.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="README.md" />
     <None Include="LICENSE" />
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
