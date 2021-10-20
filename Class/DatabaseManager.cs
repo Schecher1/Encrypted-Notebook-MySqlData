@@ -7,6 +7,7 @@ namespace Encrypted_Notebook.Class
 {
     class DatabaseManager
     {
+        EncryptionManager EMgr = new EncryptionManager();
         public static MySqlConnection con = new MySqlConnection();
         public static MySqlCommand cmd = new MySqlCommand();
         public static MySqlDataReader reader;
@@ -86,20 +87,21 @@ namespace Encrypted_Notebook.Class
 
         public void createUser(string userName, string userPassword)
         {
-            cmd.CommandText = ($"INSERT INTO `user` (`user_Username`, `user_Password`) VALUES ('{userName.ToLower()}', '{userPassword}');");
+            cmd.CommandText = ($"INSERT INTO `user` (`user_Username`, `user_Password`) VALUES ('{userName.ToLower()}', '{EMgr.GetHash_SHA512(userPassword)}');");
             cmd.ExecuteNonQuery();
             cmd.CommandText = (SQL.UserTableScript_Start + userName.ToLower() + SQL.UserTableScript_End);
             cmd.ExecuteNonQuery();
         }
         public bool loginUser(string userName, string userPassword)
         {
-            cmd.CommandText = ($"SELECT user_ID FROM db_EncryptedNotebook.user WHERE (user_Username = '{userName}' and user_Password = '{userPassword}');");
+            cmd.CommandText = ($"SELECT user_ID FROM db_EncryptedNotebook.user WHERE (user_Username = '{userName}' and user_Password = '{EMgr.GetHash_SHA512(userPassword)}');");
             if (Convert.ToInt32(cmd.ExecuteScalar()) != 0)
             {
-                cmd.CommandText = ($"SELECT user_ID FROM db_EncryptedNotebook.user WHERE (user_Username = '{userName}' and user_Password = '{userPassword}');");
+                cmd.CommandText = ($"SELECT user_ID FROM db_EncryptedNotebook.user WHERE (user_Username = '{userName}' and user_Password = '{EMgr.GetHash_SHA512(userPassword)}');");
 
                 UserInfoManager.userName = userName.ToLower();
                 UserInfoManager.userID = Convert.ToInt32(cmd.ExecuteScalar());
+                UserInfoManager.userPassword = userPassword; //ÄNDERN
                 return true;
             }  
             else
