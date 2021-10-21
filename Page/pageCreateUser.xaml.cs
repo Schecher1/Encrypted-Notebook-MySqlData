@@ -35,7 +35,7 @@ namespace Encrypted_Notebook.Page
                 return;
             }
 
-            if (DBMgr.checkIfUserExist(tb_username.Text) == 0)
+            if (DBMgr.checkIfUserExist(tb_username.Text.ToLower()) == 0)
             {
                 DBMgr.createUser(tb_username.Text, tb_password.Password);
                 mw.pageMirror.Content = new pageLoginUser();

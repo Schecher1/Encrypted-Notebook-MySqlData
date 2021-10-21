@@ -15,7 +15,7 @@ namespace Encrypted_Notebook.Class
 
         public void connectionString(string dbIp, string dbName, string dbUser, string dbPassword)
         {
-            try { con.ConnectionString = $"Server={dbIp};Database={dbName};User Id={dbUser};Password={dbPassword};SslMode=None"; }
+            try { con.ConnectionString = $"Server={dbIp};Database={dbName};User Id={dbUser};Password={dbPassword};"; }
             catch { }
         }
 
@@ -95,10 +95,10 @@ namespace Encrypted_Notebook.Class
         }
         public bool loginUser(string userName, string userPassword)
         {
-            cmd.CommandText = ($"SELECT user_ID FROM db_EncryptedNotebook.user WHERE (user_Username = '{userName}' and user_Password = '{EMgr.GetHash_SHA512(userPassword)}');");
+            cmd.CommandText = ($"SELECT user_ID FROM user WHERE (user_Username = '{userName}' and user_Password = '{EMgr.GetHash_SHA512(userPassword)}');");
             if (Convert.ToInt32(cmd.ExecuteScalar()) != 0)
             {
-                cmd.CommandText = ($"SELECT user_ID FROM db_EncryptedNotebook.user WHERE (user_Username = '{userName}' and user_Password = '{EMgr.GetHash_SHA512(userPassword)}');");
+                cmd.CommandText = ($"SELECT user_ID FROM user WHERE (user_Username = '{userName}' and user_Password = '{EMgr.GetHash_SHA512(userPassword)}');");
 
                 UserInfoManager.userName = userName.ToLower();
                 UserInfoManager.userID = Convert.ToInt32(cmd.ExecuteScalar());
@@ -160,4 +160,3 @@ namespace Encrypted_Notebook.Class
         }
     }
 }
-
