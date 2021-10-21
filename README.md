@@ -30,5 +30,25 @@ Or [press here](https://github.com/Schecher1/Encrypted-Notebook/raw/master/DOWNL
 ## Features:
 
 ✔️ Beautiful and simple UI			     	<br />
-✔ automatic setup							<br />
+✔️ automatic setup							<br />
 ✔️ user-friendly / beginner-friendly		<br />
+
+## Images:
+### ServerLogin:
+![ServerLogin](IMAGES/ServerLogin.PNG)
+### Server-Configure:
+![Server-Configure](IMAGES/ServerConfigure.PNG)
+### UserCreate:
+![UserCreate](IMAGES/UserCreate.PNG)
+### UserLogin:
+![UserLogin](IMAGES/UserLogin.PNG)
+### Notebook:
+![Notebook](IMAGES/Notebook.PNG)
+### Database-Tables:
+![Database-Tables](IMAGES/DB-Tables.PNG)
+### Database-NotesFrom:
+![Database-NotesFrom](IMAGES/DB-Table-NotesFrom.PNG)
+### Database-Setting:
+![Database-Setting](IMAGES/DB-Table-Setting.PNG)
+### Database-User:
+![Database-User](IMAGES/DB-Table-User.PNG)
