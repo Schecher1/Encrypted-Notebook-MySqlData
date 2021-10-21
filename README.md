@@ -29,26 +29,49 @@ Or [press here](https://github.com/Schecher1/Encrypted-Notebook/raw/master/DOWNL
 
 ## Features:
 
-✔️ Beautiful and simple UI			     	<br />
-✔️ automatic setup							<br />
-✔️ user-friendly / beginner-friendly		<br />
+✔️ Beautiful and simple UI			                                                                                                    	<br />
+✔️ automatic setup							                                                                                                      <br />
+✔️ user-friendly / beginner-friendly	                                                                                                <br />
 
 ## Images:
-### ServerLogin:
-![ServerLogin](IMAGES/ServerLogin.PNG)
+### Server-Login:
+-If there is no password just leave it blank (I don't recommend this)                                                                 <br />
+-The "Save" button saves everything except the password, because it will be saved unencrypted in a file (because of the security)     <br />
+![Server-Login](IMAGES/Version%201.0.0.0/ServerLogin.PNG)
+
+
 ### Server-Configure:
-![Server-Configure](IMAGES/ServerConfigure.PNG)
-### UserCreate:
-![UserCreate](IMAGES/UserCreate.PNG)
-### UserLogin:
-![UserLogin](IMAGES/UserLogin.PNG)
+-This appears only once when the database is new!                                                                                     <br />
+![Server-Configure](IMAGES/Version%201.0.0.0/ServerConfigure.PNG)
+
+
+### User-Create:
+![User-Create](IMAGES/Version%201.0.0.0/UserCreate.PNG)
+
+
+### User-Login:
+![User-Login](IMAGES/Version%201.0.0.0/UserLogin.PNG)
+
+
 ### Notebook:
-![Notebook](IMAGES/Notebook.PNG)
+-Under the "Create" button, there is a text box where you should enter the name of the new notebook.                                  <br />
+-When you delete a notebook, you must select it from the list.                                                                        <br />
+-THERE IS NO AUTOMATIC SAVE, whenever you want to change your book, save it first.                                                    <br />
+![Notebook](IMAGES/Version%201.0.0.0/Notebook.PNG)
+
+
 ### Database-Tables:
-![Database-Tables](IMAGES/DB-Tables.PNG)
+![Database-Tables](IMAGES/Version%201.0.0.0/DB-Tables.PNG)
+
+
 ### Database-NotesFrom:
-![Database-NotesFrom](IMAGES/DB-Table-NotesFrom.PNG)
+-The "NULL" means that the notebook is empty                                                                                          <br />
+![Database-NotesFrom](IMAGES/Version%201.0.0.0/DB-Table-NotesFrom.PNG)
+
+
 ### Database-Setting:
-![Database-Setting](IMAGES/DB-Table-Setting.PNG)
+![Database-Setting](IMAGES/Version%201.0.0.0/DB-Table-Setting.PNG)
+
+
 ### Database-User:
-![Database-User](IMAGES/DB-Table-User.PNG)
+![Database-User](IMAGES/Version%201.0.0.0/DB-Table-User.PNG)
