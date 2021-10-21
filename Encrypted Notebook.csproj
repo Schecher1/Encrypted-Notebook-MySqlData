@@ -217,6 +217,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SQL.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="DOWNLOAD\Latest Version.zip" />
+    <None Include="DOWNLOAD\Version 1.0.0.0.zip" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -256,9 +258,7 @@
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DOWNLOAD\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>
