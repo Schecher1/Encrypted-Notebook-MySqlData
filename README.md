@@ -32,6 +32,7 @@ Or [press here](https://github.com/Schecher1/Encrypted-Notebook/raw/master/DOWNL
 ✔️ Beautiful and simple UI			                                                                                                    	<br/>
 ✔️ automatic setup							                                                                                                      <br/>
 ✔️ user-friendly / beginner-friendly	                                                                                                <br/>
+✔️ encrypted or hashed                                                                                                                <br/>
 
 ## Images:
 ### Server-Login:
