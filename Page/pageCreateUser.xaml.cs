@@ -46,5 +46,7 @@ namespace Encrypted_Notebook.Page
                 msgBox_error.Visibility = Visibility.Visible;
             }
         }
+
+        private void bttn_BackTo_Click(object sender, RoutedEventArgs e) => mw.pageMirror.Content = new pageLoginUser();
     }
 }

@@ -35,5 +35,11 @@ namespace Encrypted_Notebook.Page
         }
 
         private void bttn_createUser_Click(object sender, RoutedEventArgs e) => mw.pageMirror.Content = new pageCreateUser();
+
+        private void bttn_BackTo_Click(object sender, RoutedEventArgs e)
+        {
+            DBMgr.dbDisconnect();
+            mw.pageMirror.Content = new pageLoginServer();
+        }
     }
 }

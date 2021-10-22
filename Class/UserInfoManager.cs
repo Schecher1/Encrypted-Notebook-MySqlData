@@ -8,5 +8,10 @@ namespace Encrypted_Notebook.Class
         public static SecureString userPassword;
         public static int userID;
         public static string userActivNotebook;
+        public static byte[] userSalt;
+        
+        // new byte[] 
+        // Set your salt here, change it to meet your flavor:
+        // The salt bytes must be at least 8 bytes.
     }
 }

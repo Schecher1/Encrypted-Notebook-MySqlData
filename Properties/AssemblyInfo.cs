@@ -13,7 +13,7 @@ using System.Windows;
 [assembly: AssemblyCompany("GermanNightmare")]
 [assembly: AssemblyProduct("Encrypted Notebook")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("GermanNightmare")]
 [assembly: AssemblyCulture("")]
 
 // Durch Festlegen von ComVisible auf FALSE werden die Typen in dieser Assembly

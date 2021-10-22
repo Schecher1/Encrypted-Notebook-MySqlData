@@ -21,5 +21,10 @@
         <Button x:Name="bttn_login" Content="Login" HorizontalAlignment="Center" Margin="0,0,0,25" VerticalAlignment="Bottom" Width="220" Height="65" Background="#B2494949" BorderBrush="#00707070" Foreground="White" FontSize="30" FontWeight="Bold" Click="bttn_login_Click"/>
         <TextBox x:Name="msgBox_error" HorizontalAlignment="Center" Margin="0,0,0,100" TextWrapping="Wrap" Text="Error Message" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="#00ABADB3" Foreground="Red" FontSize="15" IsReadOnly="True"/>
         <Button x:Name="bttn_createUser" Content="Create an User" HorizontalAlignment="Center" Margin="0,201,-290,0" VerticalAlignment="Center" Width="108" Height="26" Background="#00000000" BorderBrush="#00707070" Foreground="#FF5A71FF" FontSize="15" Click="bttn_createUser_Click"/>
+        <Button x:Name="bttn_BackTo" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="70" BorderBrush="#00707070" Margin="15,15,0,0" Click="bttn_BackTo_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/Encrypted Notebook;component/Resources/BackTo.png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Page>

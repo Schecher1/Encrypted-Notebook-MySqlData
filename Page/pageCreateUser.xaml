@@ -22,5 +22,11 @@
         <TextBox x:Name="msgBox_error" HorizontalAlignment="Center" Margin="0,0,0,100" TextWrapping="Wrap" Text="Error Message" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="#00ABADB3" Foreground="Red" FontSize="15" IsReadOnly="True"/>
         <Label Content="Repeat password:" HorizontalAlignment="Center" Margin="-275,0,0,-238" VerticalAlignment="Center" Background="#00000000" Foreground="White" FontSize="25" Padding="5,5,-5,5"/>
         <PasswordBox x:Name="tb_passwordRepeat" HorizontalAlignment="Center" Margin="0,0,-170,-240" VerticalAlignment="Center" FontSize="25" Width="230" Foreground="White" Background="#B2494949"/>
+        <Button x:Name="bttn_BackTo" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="70" BorderBrush="#00707070" Margin="15,15,0,0" Click="bttn_BackTo_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/Encrypted Notebook;component/Resources/BackTo.png"/>
+            </Button.Background>
+        </Button>
+        <TextBox HorizontalAlignment="Center" Margin="150,360,150,0" TextWrapping="Wrap" Text="Choose a secure and long password! Although your password is hashed, it is always crackable if it is short or simple! (if the password is known, they can also decrypt your notes!)" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="#00ABADB3" Foreground="Red" FontSize="15" IsReadOnly="True"/>
     </Grid>
 </Page>

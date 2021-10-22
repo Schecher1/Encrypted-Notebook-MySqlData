@@ -1,14 +1,19 @@
-﻿CREATE TABLE user (
+﻿CREATE TABLE `user` (
   `user_ID` INT NOT NULL AUTO_INCREMENT,
   `user_Username` VARCHAR(255) NULL,
   `user_Password` LONGTEXT NULL,
   PRIMARY KEY (`user_ID`));
 
-CREATE TABLE setting (
+CREATE TABLE `setting` (
   `setting_ID` INT NOT NULL AUTO_INCREMENT,
   `setting_Name` VARCHAR(255) NULL,
   `setting_Value` LONGTEXT NULL,
   PRIMARY KEY (`setting_ID`));
+
+ CREATE TABLE `salt` (
+  `salt_ID` INT NOT NULL AUTO_INCREMENT,
+  `salt_Value` VARCHAR(30) NOT NULL,
+  PRIMARY KEY (`salt_ID`));
 
 INSERT INTO setting (
 `setting_Name`, `setting_Value`) 

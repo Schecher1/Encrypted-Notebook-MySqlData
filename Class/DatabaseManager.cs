@@ -90,6 +90,8 @@ namespace Encrypted_Notebook.Class
         {
             cmd.CommandText = ($"INSERT INTO `user` (`user_Username`, `user_Password`) VALUES ('{userName.ToLower()}', '{EMgr.GetHash_SHA512(userPassword)}');");
             cmd.ExecuteNonQuery();
+            cmd.CommandText = ($"INSERT INTO `salt` ( `salt_Value`) VALUES ('{SplitManager.SplitByteArrayIntoString(EMgr.GetNewSalt())}');");
+            cmd.ExecuteNonQuery();
             cmd.CommandText = (SQL.UserTableScript_Start + userName.ToLower() + SQL.UserTableScript_End);
             cmd.ExecuteNonQuery();
         }
@@ -103,6 +105,8 @@ namespace Encrypted_Notebook.Class
                 UserInfoManager.userName = userName.ToLower();
                 UserInfoManager.userID = Convert.ToInt32(cmd.ExecuteScalar());
                 UserInfoManager.userPassword = new NetworkCredential("", userPassword).SecurePassword;
+                UserInfoManager.userSalt = SplitManager.SplitStringIntoByteArray(GetSalt());
+
                 return true;
             }  
             else
@@ -157,6 +161,12 @@ namespace Encrypted_Notebook.Class
                     return EMgr.DecryptAES256Salt(notes, new NetworkCredential("", UserInfoManager.userPassword).Password);
             }
             catch { return ""; }
+        }
+
+        public string GetSalt()
+        {
+            cmd.CommandText = ($"SELECT salt_Value FROM salt WHERE (salt_ID = '{UserInfoManager.userID}');");
+            return cmd.ExecuteScalar().ToString();
         }
     }
 }

@@ -7,6 +7,14 @@ namespace Encrypted_Notebook.Class
 {
     class EncryptionManager
     {
+        readonly Random rng = new Random();
+
+        public byte[] GetNewSalt()
+        {
+            byte[] newSalt = new byte[] { (byte)rng.Next(1, 64), (byte)rng.Next(1, 64), (byte)rng.Next(1, 64), (byte)rng.Next(1, 64), (byte)rng.Next(1, 64), (byte)rng.Next(1, 64), (byte)rng.Next(1, 64), (byte)rng.Next(1, 64) };
+            return newSalt;
+        }
+
         public string GetHash_SHA512(string input)
         {
             if (input == null)
@@ -57,10 +65,6 @@ namespace Encrypted_Notebook.Class
         {
             byte[] encryptedBytes = null;
 
-            // Set your salt here, change it to meet your flavor:
-            // The salt bytes must be at least 8 bytes.
-            byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-
             using (MemoryStream ms = new MemoryStream())
             {
                 using (RijndaelManaged AES = new RijndaelManaged())
@@ -68,7 +72,7 @@ namespace Encrypted_Notebook.Class
                     AES.KeySize = 256;
                     AES.BlockSize = 128;
 
-                    var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
+                    var key = new Rfc2898DeriveBytes(passwordBytes, UserInfoManager.userSalt, 1000);
                     AES.Key = key.GetBytes(AES.KeySize / 8);
                     AES.IV = key.GetBytes(AES.BlockSize / 8);
 
@@ -89,10 +93,6 @@ namespace Encrypted_Notebook.Class
         {
                 byte[] decryptedBytes = null;
 
-                // Set your salt here, change it to meet your flavor:
-                // The salt bytes must be at least 8 bytes.
-                byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-
                 using (MemoryStream ms = new MemoryStream())
                 {
                     using (RijndaelManaged AES = new RijndaelManaged())
@@ -100,7 +100,7 @@ namespace Encrypted_Notebook.Class
                         AES.KeySize = 256;
                         AES.BlockSize = 128;
 
-                        var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
+                        var key = new Rfc2898DeriveBytes(passwordBytes, UserInfoManager.userSalt, 1000);
                         AES.Key = key.GetBytes(AES.KeySize / 8);
                         AES.IV = key.GetBytes(AES.BlockSize / 8);
 
