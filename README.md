@@ -73,5 +73,9 @@ Or [press here](https://github.com/Schecher1/Encrypted-Notebook/raw/master/DOWNL
 ![Database-Setting](IMAGES/Version%201.0.0.0/DB-Table-Setting.PNG)
 
 
+### Database-Salt:
+![Database-Setting](IMAGES/Version%201.0.0.0/DB-Table-Salt.PNG)
+
+
 ### Database-User:
 ![Database-User](IMAGES/Version%201.0.0.0/DB-Table-User.PNG)
