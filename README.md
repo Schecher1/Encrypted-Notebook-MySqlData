@@ -1,4 +1,4 @@
-﻿﻿<h1>Encrypted Notebook (written in C#)</h1>
+﻿﻿<h1>Encrypted Notebook (written in WPF C#)</h1>
 
 ## Important Info!
 This is a project of mine, which I have released for further 
@@ -29,19 +29,19 @@ Or [press here](https://github.com/Schecher1/Encrypted-Notebook/raw/master/DOWNL
 
 ## Features:
 
-✔️ Beautiful and simple UI			                                                                                                    	<br />
-✔️ automatic setup							                                                                                                      <br />
-✔️ user-friendly / beginner-friendly	                                                                                                <br />
+✔️ Beautiful and simple UI			                                                                                                    	<br/>
+✔️ automatic setup							                                                                                                      <br/>
+✔️ user-friendly / beginner-friendly	                                                                                                <br/>
 
 ## Images:
 ### Server-Login:
--If there is no password just leave it blank (I don't recommend this)                                                                 <br />
--The "Save" button saves everything except the password, because it will be saved unencrypted in a file (because of the security)     <br />
+-If there is no password just leave it blank (I don't recommend this)                                                                 <br/>
+-The "Save" button saves everything except the password, because it will be saved unencrypted in a file (because of the security)     <br/>
 ![Server-Login](IMAGES/Version%201.0.0.0/ServerLogin.PNG)
 
 
 ### Server-Configure:
--This appears only once when the database is new!                                                                                     <br />
+-This appears only once when the database is new!                                                                                     <br/>
 ![Server-Configure](IMAGES/Version%201.0.0.0/ServerConfigure.PNG)
 
 
@@ -54,9 +54,9 @@ Or [press here](https://github.com/Schecher1/Encrypted-Notebook/raw/master/DOWNL
 
 
 ### Notebook:
--Under the "Create" button, there is a text box where you should enter the name of the new notebook.                                  <br />
--When you delete a notebook, you must select it from the list.                                                                        <br />
--THERE IS NO AUTOMATIC SAVE, whenever you want to change your book, save it first.                                                    <br />
+-Under the "Create" button, there is a text box where you should enter the name of the new notebook.                                  <br/>
+-When you delete a notebook, you must select it from the list.                                                                        <br/>
+-THERE IS NO AUTOMATIC SAVE, whenever you want to change your book, save it first.                                                    <br/>
 ![Notebook](IMAGES/Version%201.0.0.0/Notebook.PNG)
 
 
@@ -65,7 +65,7 @@ Or [press here](https://github.com/Schecher1/Encrypted-Notebook/raw/master/DOWNL
 
 
 ### Database-NotesFrom:
--The "NULL" means that the notebook is empty                                                                                          <br />
+-The "NULL" means that the notebook is empty                                                                                          <br/>
 ![Database-NotesFrom](IMAGES/Version%201.0.0.0/DB-Table-NotesFrom.PNG)
 
 
