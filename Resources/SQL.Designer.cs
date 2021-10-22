@@ -61,47 +61,29 @@ namespace Encrypted_Notebook.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die CREATE TABLE user (
+        ///   Sucht eine lokalisierte Zeichenfolge, die CREATE TABLE `user` (
         ///  `user_ID` INT NOT NULL AUTO_INCREMENT,
         ///  `user_Username` VARCHAR(255) NULL,
         ///  `user_Password` LONGTEXT NULL,
         ///  PRIMARY KEY (`user_ID`));
         ///
-        ///CREATE TABLE setting (
+        ///CREATE TABLE `setting` (
         ///  `setting_ID` INT NOT NULL AUTO_INCREMENT,
         ///  `setting_Name` VARCHAR(255) NULL,
         ///  `setting_Value` LONGTEXT NULL,
         ///  PRIMARY KEY (`setting_ID`));
         ///
-        ///INSERT INTO setting (
-        ///`setting_Name`, `setting_Value`) 
-        ///VALUES (&apos;IsConfigured&apos;, &apos;1&apos;); ähnelt.
+        ///CREATE TABLE `salt` (
+        ///  `salt_ID` INT NOT NULL AUTO_INCREMENT,
+        ///  `salt_Value` VARCHAR(30) NOT NULL,
+        ///  PRIMARY KEY (`salt_ID`));
+        ///
+        ///CREATE TABLE `notebooks` (
+        ///  `not [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         internal static string ServerTableScript {
             get {
                 return ResourceManager.GetString("ServerTableScript", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ` (
-        ///  `notebook_ID` INT NOT NULL AUTO_INCREMENT,
-        ///  `notebook_Name` VARCHAR(255) NOT NULL,
-        ///  `notebook_Value` LONGTEXT NULL,
-        ///  PRIMARY KEY (`notebook_ID`)); ähnelt.
-        /// </summary>
-        internal static string UserTableScript_End {
-            get {
-                return ResourceManager.GetString("UserTableScript_End", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die CREATE TABLE `notebooks from  ähnelt.
-        /// </summary>
-        internal static string UserTableScript_Start {
-            get {
-                return ResourceManager.GetString("UserTableScript_Start", resourceCulture);
             }
         }
     }
