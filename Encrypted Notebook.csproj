@@ -250,12 +250,6 @@
     <Resource Include="Resources\ServerTableScript.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\UserTableScript-End.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\UserTableScript-Start.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\BackTo.png" />
     <Resource Include="IMAGES\Version 1.0.0.0\DB-Table-NotesFrom.PNG" />
     <Resource Include="IMAGES\Version 1.0.0.0\DB-Table-Setting.PNG" />

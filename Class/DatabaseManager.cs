@@ -92,8 +92,6 @@ namespace Encrypted_Notebook.Class
             cmd.ExecuteNonQuery();
             cmd.CommandText = ($"INSERT INTO `salt` ( `salt_Value`) VALUES ('{SplitManager.SplitByteArrayIntoString(EMgr.GetNewSalt())}');");
             cmd.ExecuteNonQuery();
-            cmd.CommandText = (SQL.UserTableScript_Start + userName.ToLower() + SQL.UserTableScript_End);
-            cmd.ExecuteNonQuery();
         }
         public bool loginUser(string userName, string userPassword)
         {
@@ -108,7 +106,7 @@ namespace Encrypted_Notebook.Class
                 UserInfoManager.userSalt = SplitManager.SplitStringIntoByteArray(GetSalt());
 
                 return true;
-            }  
+            }
             else
                 return false;
         }
@@ -117,8 +115,8 @@ namespace Encrypted_Notebook.Class
         {
             List<string> Notebooks = new List<string>();
 
-            cmd.CommandText = ($"SELECT notebook_Name FROM `notebooks from {UserInfoManager.userName}`;");
-            
+            cmd.CommandText = ($"SELECT notebook_Name FROM notebooks WHERE (notebook_Owner = '{UserInfoManager.userID}');");
+
             reader = cmd.ExecuteReader();
             while (reader.Read())
                 Notebooks.Add(EMgr.DecryptAES256Salt((reader["notebook_Name"].ToString()), new NetworkCredential("", UserInfoManager.userPassword).Password));
@@ -128,32 +126,32 @@ namespace Encrypted_Notebook.Class
         }
         public void createNotebook(string notebookName)
         {
-            cmd.CommandText = ($"SELECT notebook_Name FROM `notebooks from {UserInfoManager.userName}` WHERE (notebook_Name = '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password)}');");
+            cmd.CommandText = ($"SELECT notebook_Name FROM notebooks WHERE (notebook_Name = '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password)}' AND notebook_Owner = '{UserInfoManager.userID}');");
             if (cmd.ExecuteScalar() == null)
             {
-                cmd.CommandText = ($"INSERT INTO `notebooks from {UserInfoManager.userName}` (`notebook_Name`) VALUES ('{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password)}');");
+                cmd.CommandText = ($"INSERT INTO notebooks (`notebook_Owner`, `notebook_Name`) VALUES ('{UserInfoManager.userID}', '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password)}');");
                 cmd.ExecuteNonQuery();
             }
         }
         public void deleteNotebook(string notebookName)
         {
-            cmd.CommandText = ($"DELETE FROM `notebooks from {UserInfoManager.userName}` WHERE (`notebook_Name` = '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password)}');");
+            cmd.CommandText = ($"DELETE FROM notebooks WHERE (`notebook_Name` = '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password)}' AND notebook_Owner = '{UserInfoManager.userName}');");
             cmd.ExecuteNonQuery();
         }
 
         public void writeNotes(string notes)
         {
             if (notes != "" || notes != null)
-                cmd.CommandText = ($"UPDATE `notebooks from {UserInfoManager.userName}` SET `notebook_Value` = '{EMgr.EncryptAES256Salt(notes, new NetworkCredential("", UserInfoManager.userPassword).Password)}' WHERE (`notebook_Name` = '{UserInfoManager.userActivNotebook}');");
+                cmd.CommandText = ($"UPDATE notebooks SET `notebook_Value` = '{EMgr.EncryptAES256Salt(notes, new NetworkCredential("", UserInfoManager.userPassword).Password)}' WHERE (`notebook_Name` = '{UserInfoManager.userActivNotebook}' AND notebook_Owner = '{UserInfoManager.userID}');");
             else
-                cmd.CommandText = ($"UPDATE `notebooks from {UserInfoManager.userName}` SET `notebook_Value` = '{notes}' WHERE (`notebook_Name` = '{UserInfoManager.userActivNotebook}');");
+                cmd.CommandText = ($"UPDATE notebooks SET `notebook_Value` = '{notes}' WHERE (`notebook_Name` = '{UserInfoManager.userActivNotebook}' AND notebook_Owner = '{UserInfoManager.userID}');");
             cmd.ExecuteNonQuery();
         }
         public string readNotes()
         {
             try
             {
-                cmd.CommandText = ($"SELECT notebook_Value FROM `notebooks from {UserInfoManager.userName}` where (notebook_Name = '{UserInfoManager.userActivNotebook}');");
+                cmd.CommandText = ($"SELECT notebook_Value FROM notebooks WHERE (notebook_Name = '{UserInfoManager.userActivNotebook}' AND notebook_Owner = '{UserInfoManager.userID}');");
                 string notes = cmd.ExecuteScalar().ToString();
                 if (notes == "" || notes == null)
                     return notes;

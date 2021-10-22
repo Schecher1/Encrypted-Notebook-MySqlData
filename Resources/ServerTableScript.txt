@@ -10,11 +10,22 @@ CREATE TABLE `setting` (
   `setting_Value` LONGTEXT NULL,
   PRIMARY KEY (`setting_ID`));
 
- CREATE TABLE `salt` (
+CREATE TABLE `salt` (
   `salt_ID` INT NOT NULL AUTO_INCREMENT,
   `salt_Value` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`salt_ID`));
 
+CREATE TABLE `notebooks` (
+  `notebook_ID` INT NOT NULL AUTO_INCREMENT,
+  `notebook_Owner` VARCHAR(255) NOT NULL,
+  `notebook_Name` VARCHAR(255) NOT NULL,
+  `notebook_Value` LONGTEXT NULL,
+  PRIMARY KEY (`notebook_ID`));
+
 INSERT INTO setting (
 `setting_Name`, `setting_Value`) 
 VALUES ('IsConfigured', '1');
+
+INSERT INTO setting (
+`setting_Name`, `setting_Value`) 
+VALUES ('DatabaseVersion', '1.0.0.0');
