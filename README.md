@@ -65,9 +65,9 @@ Or [press here](https://github.com/Schecher1/Encrypted-Notebook/raw/master/DOWNL
 ![Database-Tables](IMAGES/Version%201.0.0.0/DB-Tables.PNG)
 
 
-### Database-NotesFrom:
+### Database-Notebooks:
 -The "NULL" means that the notebook is empty                                                                                          <br/>
-![Database-NotesFrom](IMAGES/Version%201.0.0.0/DB-Table-NotesFrom.PNG)
+![Database-Notebooks](IMAGES/Version%201.1.0.0/DB-Table-Notebooks.PNG)
 
 
 ### Database-Setting:

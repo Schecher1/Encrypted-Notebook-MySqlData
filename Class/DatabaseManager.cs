@@ -135,7 +135,7 @@ namespace Encrypted_Notebook.Class
         }
         public void deleteNotebook(string notebookName)
         {
-            cmd.CommandText = ($"DELETE FROM notebooks WHERE (`notebook_Name` = '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password)}' AND notebook_Owner = '{UserInfoManager.userName}');");
+            cmd.CommandText = ($"DELETE FROM notebooks WHERE (`notebook_Name` = '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password)}' AND notebook_Owner = '{UserInfoManager.userID}');");
             cmd.ExecuteNonQuery();
         }
 
