@@ -4,12 +4,12 @@ using Encrypted_Notebook.Class;
 
 namespace Encrypted_Notebook.Page
 {
-    public partial class pageLoginServer
+    public partial class pageServerLogin
     {
         MainWindow mw = (MainWindow)Application.Current.MainWindow;
         DatabaseManager DBMgr = new DatabaseManager();
 
-        public pageLoginServer()
+        public pageServerLogin()
         {
             InitializeComponent();
             msgBox_error.Visibility = Visibility.Hidden;
@@ -49,7 +49,7 @@ namespace Encrypted_Notebook.Page
             if (DBMgr.dbConnect() == "successfully connected to the database!")
             {
                 if (DBMgr.checkIfServerIsConfigured() == 1)
-                    mw.pageMirror.Content = new pageLoginUser();
+                    mw.pageMirror.Content = new pageUserLogin();
                 else
                     mw.pageMirror.Content = new pageServerConfigure();
             }

@@ -32,7 +32,7 @@ namespace Encrypted_Notebook.Class
             return Sb.ToString();
         }
 
-        public string EncryptAES256Salt(string input, string password)
+        public string EncryptAES256Salt(string input, string password, byte[] salt)
         {
             // Get the bytes of the string
             byte[] bytesToBeEncrypted = Encoding.UTF8.GetBytes(input);
@@ -41,27 +41,27 @@ namespace Encrypted_Notebook.Class
             // Hash the password with SHA256
             passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
 
-            byte[] bytesEncrypted = AES256_Encrypt(bytesToBeEncrypted, passwordBytes);
+            byte[] bytesEncrypted = AES256_Encrypt(bytesToBeEncrypted, passwordBytes, salt);
 
             string result = Convert.ToBase64String(bytesEncrypted);
 
             return result;
         }
-        public string DecryptAES256Salt(string input, string password)
+        public string DecryptAES256Salt(string input, string password, byte[] salt)
         {
             // Get the bytes of the string
             byte[] bytesToBeDecrypted = Convert.FromBase64String(input);
             byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
             passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
 
-            byte[] bytesDecrypted = AES256_Decrypt(bytesToBeDecrypted, passwordBytes);
+            byte[] bytesDecrypted = AES256_Decrypt(bytesToBeDecrypted, passwordBytes, salt);
 
             string result = Encoding.UTF8.GetString(bytesDecrypted);
 
             return result;
         }
 
-        private byte[] AES256_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
+        private byte[] AES256_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes, byte[] salt)
         {
             byte[] encryptedBytes = null;
 
@@ -72,7 +72,7 @@ namespace Encrypted_Notebook.Class
                     AES.KeySize = 256;
                     AES.BlockSize = 128;
 
-                    var key = new Rfc2898DeriveBytes(passwordBytes, UserInfoManager.userSalt, 1000);
+                    var key = new Rfc2898DeriveBytes(passwordBytes, salt, 1000);
                     AES.Key = key.GetBytes(AES.KeySize / 8);
                     AES.IV = key.GetBytes(AES.BlockSize / 8);
 
@@ -89,7 +89,7 @@ namespace Encrypted_Notebook.Class
 
             return encryptedBytes;
         }
-        private byte[] AES256_Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes)
+        private byte[] AES256_Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes, byte[] salt)
         {
                 byte[] decryptedBytes = null;
 
@@ -100,7 +100,7 @@ namespace Encrypted_Notebook.Class
                         AES.KeySize = 256;
                         AES.BlockSize = 128;
 
-                        var key = new Rfc2898DeriveBytes(passwordBytes, UserInfoManager.userSalt, 1000);
+                        var key = new Rfc2898DeriveBytes(passwordBytes, salt, 1000);
                         AES.Key = key.GetBytes(AES.KeySize / 8);
                         AES.IV = key.GetBytes(AES.BlockSize / 8);
 

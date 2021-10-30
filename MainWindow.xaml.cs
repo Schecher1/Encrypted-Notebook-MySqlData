@@ -7,7 +7,7 @@ namespace Encrypted_Notebook
         public MainWindow()
         {
             InitializeComponent();
-            pageMirror.Content = new Page.pageLoginServer();
+            pageMirror.Content = new Page.pageServerLogin();
         }
     }
 }

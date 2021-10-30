@@ -1,4 +1,4 @@
-﻿<Page x:Class="Encrypted_Notebook.Page.pageLoginUser"
+﻿<Page x:Class="Encrypted_Notebook.Page.pageUserLogin"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Encrypted_Notebook.Page"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="800"
-      Title="pageLoginUser">
+      Title="pageUserLogin">
 
     <Grid>
         <Frame Content="" HorizontalAlignment="Center" Height="200" Margin="0,50,0,0" VerticalAlignment="Top" Width="200" RenderTransformOrigin="0.25,0.25">

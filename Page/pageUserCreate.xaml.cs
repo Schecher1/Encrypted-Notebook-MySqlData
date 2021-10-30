@@ -3,12 +3,12 @@ using System.Windows;
 
 namespace Encrypted_Notebook.Page
 {
-    public partial class pageCreateUser
+    public partial class pageUserCreate
     {
         MainWindow mw = (MainWindow)Application.Current.MainWindow;
         DatabaseManager DBMgr = new DatabaseManager();
 
-        public pageCreateUser()
+        public pageUserCreate()
         {
             InitializeComponent();
             msgBox_error.Visibility = Visibility.Hidden;
@@ -34,11 +34,17 @@ namespace Encrypted_Notebook.Page
                 msgBox_error.Visibility = Visibility.Visible;
                 return;
             }
+            else if (tb_password.Password.Length <= 8)
+            {
+                msgBox_error.Text = ("Your password must be at least 8 characters long");
+                msgBox_error.Visibility = Visibility.Visible;
+                return;
+            }
 
             if (DBMgr.checkIfUserExist(tb_username.Text.ToLower()) == 0)
             {
                 DBMgr.createUser(tb_username.Text, tb_password.Password);
-                mw.pageMirror.Content = new pageLoginUser();
+                mw.pageMirror.Content = new pageUserLogin();
             }
             else
             {
@@ -47,6 +53,6 @@ namespace Encrypted_Notebook.Page
             }
         }
 
-        private void bttn_BackTo_Click(object sender, RoutedEventArgs e) => mw.pageMirror.Content = new pageLoginUser();
+        private void bttn_BackTo_Click(object sender, RoutedEventArgs e) => mw.pageMirror.Content = new pageUserLogin();
     }
 }

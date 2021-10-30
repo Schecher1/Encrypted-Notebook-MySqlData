@@ -29,7 +29,7 @@
     <PublisherName>Schecher_1</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <ApplicationVersion>2.1.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -39,10 +39,9 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>
-    </DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>true</Prefer32Bit>
@@ -127,6 +126,7 @@
       <HintPath>packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -152,7 +152,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Class\GlobalSuppressions.cs" />
+    <Compile Include="Class\ImportExportManager.cs" />
     <Compile Include="Class\SplitManager.cs" />
+    <Compile Include="Page\pageUserDelete.xaml.cs">
+      <DependentUpon>pageUserDelete.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\pageUserHome.xaml.cs">
+      <DependentUpon>pageUserHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\pageUserNotebooksImportExport.xaml.cs">
+      <DependentUpon>pageUserNotebooksImportExport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\SQL.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,7 +183,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Page\pageCreateUser.xaml">
+    <Page Include="Page\pageUserCreate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -181,15 +191,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Page\pageLoginServer.xaml">
+    <Page Include="Page\pageServerLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Page\pageLoginUser.xaml">
+    <Page Include="Page\pageUserLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Page\pageNotebook.xaml">
+    <Page Include="Page\pageUserNotebook.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,22 +207,34 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Page\pageUserDelete.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page\pageUserHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page\pageUserNotebooksImportExport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Page\pageCreateUser.xaml.cs">
-      <DependentUpon>pageCreateUser.xaml</DependentUpon>
+    <Compile Include="Page\pageUserCreate.xaml.cs">
+      <DependentUpon>pageUserCreate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\pageDatabase404.xaml.cs">
       <DependentUpon>pageDatabase404.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Page\pageLoginServer.xaml.cs">
-      <DependentUpon>pageLoginServer.xaml</DependentUpon>
+    <Compile Include="Page\pageServerLogin.xaml.cs">
+      <DependentUpon>pageServerLogin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Page\pageLoginUser.xaml.cs">
-      <DependentUpon>pageLoginUser.xaml</DependentUpon>
+    <Compile Include="Page\pageUserLogin.xaml.cs">
+      <DependentUpon>pageUserLogin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Page\pageNotebook.xaml.cs">
-      <DependentUpon>pageNotebook.xaml</DependentUpon>
+    <Compile Include="Page\pageUserNotebook.xaml.cs">
+      <DependentUpon>pageUserNotebook.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\pageServerConfigure.xaml.cs">
       <DependentUpon>pageServerConfigure.xaml</DependentUpon>
@@ -230,7 +252,10 @@
       <LastGenOutput>SQL.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="DOWNLOAD\Latest Version.zip" />
+    <None Include="DOWNLOAD\README.md" />
     <None Include="DOWNLOAD\Version 1.0.0.0.zip" />
+    <None Include="DOWNLOAD\Version 1.1.0.0.zip" />
+    <None Include="DOWNLOAD\Version 2.1.0.0.zip" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -250,6 +275,31 @@
     <Resource Include="Resources\ServerTableScript.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="IMAGES\Version 2.1.0.0\DB-Table-Notebooks.PNG" />
+    <Resource Include="IMAGES\Version 2.1.0.0\DB-Table-Salt.PNG" />
+    <Resource Include="IMAGES\Version 2.1.0.0\DB-Table-Setting.PNG" />
+    <Resource Include="IMAGES\Version 2.1.0.0\DB-Table-User.PNG" />
+    <Resource Include="IMAGES\Version 2.1.0.0\DB-Tables.PNG" />
+    <Resource Include="IMAGES\Version 2.1.0.0\Notebook.PNG" />
+    <Resource Include="IMAGES\Version 2.1.0.0\NotebookExportImport.PNG" />
+    <Resource Include="IMAGES\Version 2.1.0.0\ServerConfigure.PNG" />
+    <Resource Include="IMAGES\Version 2.1.0.0\ServerLogin.PNG" />
+    <Resource Include="IMAGES\Version 2.1.0.0\UserCreate.PNG" />
+    <Resource Include="IMAGES\Version 2.1.0.0\UserDelete.PNG" />
+    <Resource Include="IMAGES\Version 2.1.0.0\UserHomeMenu.PNG" />
+    <Resource Include="IMAGES\Version 2.1.0.0\UserLogin.PNG" />
+    <Resource Include="IMAGES\Version 1.1.0.0\DB-Table-Notebooks.PNG" />
+    <Resource Include="IMAGES\Version 1.1.0.0\DB-Table-Salt.PNG" />
+    <Resource Include="IMAGES\Version 1.1.0.0\DB-Table-Setting.PNG" />
+    <Resource Include="IMAGES\Version 1.1.0.0\DB-Table-User.PNG" />
+    <Resource Include="IMAGES\Version 1.1.0.0\DB-Tables.PNG" />
+    <Resource Include="IMAGES\Version 1.1.0.0\Notebook.PNG" />
+    <Resource Include="IMAGES\Version 1.1.0.0\ServerConfigure.PNG" />
+    <Resource Include="IMAGES\Version 1.1.0.0\ServerLogin.PNG" />
+    <Resource Include="IMAGES\Version 1.1.0.0\UserCreate.PNG" />
+    <Resource Include="IMAGES\Version 1.1.0.0\UserLogin.PNG" />
+    <Resource Include="Resources\Erase.png" />
+    <Resource Include="Resources\Home.PNG" />
     <Resource Include="Resources\BackTo.png" />
     <Resource Include="IMAGES\Version 1.0.0.0\DB-Table-NotesFrom.PNG" />
     <Resource Include="IMAGES\Version 1.0.0.0\DB-Table-Setting.PNG" />

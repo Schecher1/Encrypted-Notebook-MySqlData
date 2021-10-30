@@ -3,15 +3,16 @@ using System.Windows;
 
 namespace Encrypted_Notebook.Page
 {
-    public partial class pageLoginUser
+    public partial class pageUserLogin
     {
         MainWindow mw = (MainWindow)Application.Current.MainWindow;
         DatabaseManager DBMgr = new DatabaseManager();
 
-        public pageLoginUser()
+        public pageUserLogin()
         {
             InitializeComponent();
             msgBox_error.Visibility = Visibility.Hidden;
+            mw.pageMirror.NavigationService.RemoveBackEntry();
         }
 
         private void bttn_login_Click(object sender, RoutedEventArgs e)
@@ -25,7 +26,7 @@ namespace Encrypted_Notebook.Page
 
             if (DBMgr.loginUser(tb_username.Text, tb_password.Password))
             {
-                mw.pageMirror.Content = new pageNotebook();
+                mw.pageMirror.Content = new pageUserHome();
             }
             else
             {
@@ -34,12 +35,12 @@ namespace Encrypted_Notebook.Page
             }
         }
 
-        private void bttn_createUser_Click(object sender, RoutedEventArgs e) => mw.pageMirror.Content = new pageCreateUser();
+        private void bttn_createUser_Click(object sender, RoutedEventArgs e) => mw.pageMirror.Content = new pageUserCreate();
 
         private void bttn_BackTo_Click(object sender, RoutedEventArgs e)
         {
             DBMgr.dbDisconnect();
-            mw.pageMirror.Content = new pageLoginServer();
+            mw.pageMirror.Content = new pageServerLogin();
         }
     }
 }

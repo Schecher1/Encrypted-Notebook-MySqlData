@@ -17,7 +17,7 @@ namespace Encrypted_Notebook.Page
         private void bttn_configure_Click(object sender, RoutedEventArgs e)
         {
             if (DBMgr.ConfiguredServer() == 1)
-                mw.pageMirror.Content = new pageLoginUser();
+                mw.pageMirror.Content = new pageUserLogin();
             else
                 mw.pageMirror.Content = new pageDatabase404();
         }

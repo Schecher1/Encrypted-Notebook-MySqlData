@@ -6,13 +6,13 @@ using System.Windows.Controls;
 
 namespace Encrypted_Notebook.Page
 {
-    public partial class pageNotebook
+    public partial class pageUserNotebook
     {
         MainWindow mw = (MainWindow)Application.Current.MainWindow;
         DatabaseManager DBMgr = new DatabaseManager();
         EncryptionManager EMgr = new EncryptionManager();
 
-        public pageNotebook()
+        public pageUserNotebook()
         {
             InitializeComponent();
             LoadNotebooks();
@@ -39,7 +39,7 @@ namespace Encrypted_Notebook.Page
             }
             else
             {
-                UserInfoManager.userActivNotebook = EMgr.EncryptAES256Salt(lb_notebooks.SelectedItem.ToString(), new NetworkCredential("", UserInfoManager.userPassword).Password);
+                UserInfoManager.userActivNotebook = EMgr.EncryptAES256Salt(lb_notebooks.SelectedItem.ToString(), new NetworkCredential("", UserInfoManager.userPassword).Password, UserInfoManager.userSalt);
                 tb_notes.Text = DBMgr.readNotes();
             }
         }
@@ -70,17 +70,6 @@ namespace Encrypted_Notebook.Page
             DBMgr.writeNotes(tb_notes.Text);
         }
 
-        private void bttn_logout_Click(object sender, RoutedEventArgs e)
-        {
-            UserInfoManager.userName = null;
-            UserInfoManager.userActivNotebook = null;
-            UserInfoManager.userID = -1;
-            UserInfoManager.userPassword.Clear();
-            tb_notes.Text = "";
-            lb_notebooks.Items.Clear();
-
-            mw.pageMirror.Content = new pageLoginUser();
-            System.GC.Collect();
-        }
+        private void bttn_BackTo_Click(object sender, RoutedEventArgs e) => mw.pageMirror.Content = new pageUserHome();
     }
 }

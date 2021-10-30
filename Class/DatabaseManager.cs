@@ -93,6 +93,17 @@ namespace Encrypted_Notebook.Class
             cmd.CommandText = ($"INSERT INTO `salt` ( `salt_Value`) VALUES ('{SplitManager.SplitByteArrayIntoString(EMgr.GetNewSalt())}');");
             cmd.ExecuteNonQuery();
         }
+        public void deleteUser()
+        {
+            cmd.CommandText = ("SET SQL_SAFE_UPDATES = 0;");
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = ($"DELETE FROM `user` WHERE (`user_ID` = '{UserInfoManager.userID}');");
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = ($"DELETE FROM `salt` WHERE (`salt_ID` = '{UserInfoManager.userID}');");
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = ($"DELETE FROM `notebooks` WHERE (`notebook_Owner` = '{UserInfoManager.userID}');");
+            cmd.ExecuteNonQuery();
+        }
         public bool loginUser(string userName, string userPassword)
         {
             cmd.CommandText = ($"SELECT user_ID FROM user WHERE (user_Username = '{userName}' and user_Password = '{EMgr.GetHash_SHA512(userPassword)}');");
@@ -119,30 +130,30 @@ namespace Encrypted_Notebook.Class
 
             reader = cmd.ExecuteReader();
             while (reader.Read())
-                Notebooks.Add(EMgr.DecryptAES256Salt((reader["notebook_Name"].ToString()), new NetworkCredential("", UserInfoManager.userPassword).Password));
+                Notebooks.Add(EMgr.DecryptAES256Salt((reader["notebook_Name"].ToString()), new NetworkCredential("", UserInfoManager.userPassword).Password, UserInfoManager.userSalt));
             reader.Close();
 
             return Notebooks;
         }
         public void createNotebook(string notebookName)
         {
-            cmd.CommandText = ($"SELECT notebook_Name FROM notebooks WHERE (notebook_Name = '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password)}' AND notebook_Owner = '{UserInfoManager.userID}');");
+            cmd.CommandText = ($"SELECT notebook_Name FROM notebooks WHERE (notebook_Name = '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password, UserInfoManager.userSalt)}' AND notebook_Owner = '{UserInfoManager.userID}');");
             if (cmd.ExecuteScalar() == null)
             {
-                cmd.CommandText = ($"INSERT INTO notebooks (`notebook_Owner`, `notebook_Name`) VALUES ('{UserInfoManager.userID}', '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password)}');");
+                cmd.CommandText = ($"INSERT INTO notebooks (`notebook_Owner`, `notebook_Name`) VALUES ('{UserInfoManager.userID}', '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password, UserInfoManager.userSalt)}');");
                 cmd.ExecuteNonQuery();
             }
         }
         public void deleteNotebook(string notebookName)
         {
-            cmd.CommandText = ($"DELETE FROM notebooks WHERE (`notebook_Name` = '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password)}' AND notebook_Owner = '{UserInfoManager.userID}');");
+            cmd.CommandText = ($"DELETE FROM notebooks WHERE (`notebook_Name` = '{EMgr.EncryptAES256Salt(notebookName, new NetworkCredential("", UserInfoManager.userPassword).Password, UserInfoManager.userSalt)}' AND notebook_Owner = '{UserInfoManager.userID}');");
             cmd.ExecuteNonQuery();
         }
 
         public void writeNotes(string notes)
         {
             if (notes != "" || notes != null)
-                cmd.CommandText = ($"UPDATE notebooks SET `notebook_Value` = '{EMgr.EncryptAES256Salt(notes, new NetworkCredential("", UserInfoManager.userPassword).Password)}' WHERE (`notebook_Name` = '{UserInfoManager.userActivNotebook}' AND notebook_Owner = '{UserInfoManager.userID}');");
+                cmd.CommandText = ($"UPDATE notebooks SET `notebook_Value` = '{EMgr.EncryptAES256Salt(notes, new NetworkCredential("", UserInfoManager.userPassword).Password, UserInfoManager.userSalt)}' WHERE (`notebook_Name` = '{UserInfoManager.userActivNotebook}' AND notebook_Owner = '{UserInfoManager.userID}');");
             else
                 cmd.CommandText = ($"UPDATE notebooks SET `notebook_Value` = '{notes}' WHERE (`notebook_Name` = '{UserInfoManager.userActivNotebook}' AND notebook_Owner = '{UserInfoManager.userID}');");
             cmd.ExecuteNonQuery();
@@ -156,7 +167,7 @@ namespace Encrypted_Notebook.Class
                 if (notes == "" || notes == null)
                     return notes;
                 else
-                    return EMgr.DecryptAES256Salt(notes, new NetworkCredential("", UserInfoManager.userPassword).Password);
+                    return EMgr.DecryptAES256Salt(notes, new NetworkCredential("", UserInfoManager.userPassword).Password, UserInfoManager.userSalt);
             }
             catch { return ""; }
         }
@@ -165,6 +176,127 @@ namespace Encrypted_Notebook.Class
         {
             cmd.CommandText = ($"SELECT salt_Value FROM salt WHERE (salt_ID = '{UserInfoManager.userID}');");
             return cmd.ExecuteScalar().ToString();
+        }
+
+        public List<string> ExportAllNotebooks(string exportPassword)
+        {
+            List<string> exportData = new List<string>();
+            byte[] salt = EMgr.GetNewSalt();
+            exportData.Add(SplitManager.SplitByteArrayIntoString(salt));
+            string new_EncryptedNotebookValue, new_EncryptedNotebookName;
+
+            cmd.CommandText = ($"SELECT notebook_Name,notebook_Value FROM notebooks WHERE (notebook_Owner = {UserInfoManager.userID});");
+
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                new_EncryptedNotebookName = 
+                    EMgr.EncryptAES256Salt(
+                        EMgr.DecryptAES256Salt(
+                            reader["notebook_Name"].ToString(), 
+                            new NetworkCredential("", UserInfoManager.userPassword).Password, 
+                            UserInfoManager.userSalt),
+                        exportPassword, 
+                        salt);
+
+                if (reader["notebook_Value"].ToString() == null || reader["notebook_Value"].ToString() == "")
+                {
+                    new_EncryptedNotebookValue = "NULL";
+                }
+                else
+                {
+                    new_EncryptedNotebookValue =
+                        EMgr.EncryptAES256Salt(
+                            EMgr.DecryptAES256Salt(
+                                reader["notebook_Value"].ToString(),
+                                new NetworkCredential("", UserInfoManager.userPassword).Password,
+                                UserInfoManager.userSalt),
+                        exportPassword,
+                        salt);
+                }
+                exportData.Add($"{new_EncryptedNotebookName}:{new_EncryptedNotebookValue}");
+            }
+            reader.Close();
+            return exportData;
+        }
+        public List<string> ExportCustomNotebooks(string exportPassword, List<string> listOfNotebooks)
+        {
+            List<string> exportData = new List<string>();
+            byte[] salt = EMgr.GetNewSalt();
+            exportData.Add(SplitManager.SplitByteArrayIntoString(salt));
+            string new_EncryptedNotebookValue, new_EncryptedNotebookName;
+
+            foreach (var notebook in listOfNotebooks)
+            {
+                cmd.CommandText = ($"SELECT notebook_Name,notebook_Value FROM notebooks WHERE (notebook_Owner = {UserInfoManager.userID} and notebook_Name = '{EMgr.EncryptAES256Salt(notebook, new NetworkCredential("", UserInfoManager.userPassword).Password,UserInfoManager.userSalt)}');");
+
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    new_EncryptedNotebookName =
+                        EMgr.EncryptAES256Salt(
+                            EMgr.DecryptAES256Salt(
+                                reader["notebook_Name"].ToString(),
+                                new NetworkCredential("", UserInfoManager.userPassword).Password,
+                                UserInfoManager.userSalt),
+                            exportPassword,
+                            salt);
+
+                    if (reader["notebook_Value"].ToString() == null || reader["notebook_Value"].ToString() == "")
+                    {
+                        new_EncryptedNotebookValue = "NULL";
+                    }
+                    else
+                    {
+                        new_EncryptedNotebookValue =
+                            EMgr.EncryptAES256Salt(
+                                EMgr.DecryptAES256Salt(
+                                    reader["notebook_Value"].ToString(),
+                                    new NetworkCredential("", UserInfoManager.userPassword).Password,
+                                    UserInfoManager.userSalt),
+                            exportPassword,
+                            salt);
+                    }
+
+                    exportData.Add($"{new_EncryptedNotebookName}:{new_EncryptedNotebookValue}");
+                }
+                reader.Close();    
+            }
+            return exportData;
+        }
+        public void ImportAllNotebooks(string importPassword, List<string> importData)
+        {
+            byte[] salt = SplitManager.SplitStringIntoByteArray(importData[0]);
+            importData.RemoveAt(0);
+            string new_EncryptedNotebookValue = null, new_EncryptedNotebookName = null;
+
+            foreach (var notebook in importData)
+            {
+                new_EncryptedNotebookName = null;
+                new_EncryptedNotebookValue = null;
+
+                string[] _tmp = notebook.Split(':');
+
+                new_EncryptedNotebookName = 
+                    EMgr.EncryptAES256Salt(
+                        EMgr.DecryptAES256Salt(_tmp[0], importPassword, salt), 
+                        new NetworkCredential("", UserInfoManager.userPassword).Password, 
+                        UserInfoManager.userSalt);
+
+                if (_tmp[1] == "NULL")
+                    new_EncryptedNotebookValue = null;
+                else
+                {
+                    new_EncryptedNotebookValue =
+                        EMgr.EncryptAES256Salt(
+                            EMgr.DecryptAES256Salt(_tmp[1], importPassword,salt),
+                            new NetworkCredential("", UserInfoManager.userPassword).Password,
+                            UserInfoManager.userSalt);
+                }
+
+                cmd.CommandText = ($"INSERT INTO notebooks (`notebook_Owner`, `notebook_Name`, `notebook_Value`) VALUES ('{UserInfoManager.userID}', '{new_EncryptedNotebookName}', '{new_EncryptedNotebookValue}');");
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }
