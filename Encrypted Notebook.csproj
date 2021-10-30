@@ -151,9 +151,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Class\GlobalSuppressions.cs" />
     <Compile Include="Class\ImportExportManager.cs" />
     <Compile Include="Class\SplitManager.cs" />
+    <Compile Include="Class\GlobalSuppressions.cs" />
     <Compile Include="Page\pageUserDelete.xaml.cs">
       <DependentUpon>pageUserDelete.xaml</DependentUpon>
     </Compile>
