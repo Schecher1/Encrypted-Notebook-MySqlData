@@ -58,8 +58,15 @@ Or [press here](https://github.com/Schecher1/Encrypted-Notebook/raw/master/DOWNL
 ![User-Home](IMAGES/Version%202.1.0.0/UserHomeMenu.PNG)
 
 
+### Import-Export:
+-All or specific notebooks can be exported																								<br/>
+-The file is of course also re-encrypted																									<br/>
+-DO NOT EDIT THE FILE OR EVERYTHING WILL BE GONE																			<br/>
+![Import-Export](IMAGES/Version%202.1.0.0/NotebookExportImport.PNG)
+
+
 ### User-Delete:
--Do it carefully! it cannot be undone!
+-Do it carefully! it cannot be undone!																										<br/>
 ![User-Delete](IMAGES/Version%202.1.0.0/UserDelete.PNG)
 
 
