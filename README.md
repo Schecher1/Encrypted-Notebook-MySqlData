@@ -54,11 +54,20 @@ Or [press here](https://github.com/Schecher1/Encrypted-Notebook/raw/master/DOWNL
 ![User-Login](IMAGES/Version%201.0.0.0/UserLogin.PNG)
 
 
+### User-Home:
+![User-Home](IMAGES/Version%202.1.0.0/UserHomeMenu.PNG)
+
+
+### User-Delete:
+-Do it carefully! it cannot be undone!
+![User-Delete](IMAGES/Version%202.1.0.0/UserDelete.PNG)
+
+
 ### Notebook:
 -Under the "Create" button, there is a text box where you should enter the name of the new notebook.                                  <br/>
 -When you delete a notebook, you must select it from the list.                                                                        <br/>
 -THERE IS NO AUTOMATIC SAVE, whenever you want to change your book, save it first.                                                    <br/>
-![Notebook](IMAGES/Version%201.0.0.0/Notebook.PNG)
+![Notebook](IMAGES/Version%202.1.0.0/Notebook.PNG)
 
 
 ### Database-Tables:
