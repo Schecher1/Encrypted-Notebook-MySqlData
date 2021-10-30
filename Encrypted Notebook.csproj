@@ -154,6 +154,12 @@
     <Compile Include="Class\ImportExportManager.cs" />
     <Compile Include="Class\SplitManager.cs" />
     <Compile Include="Class\GlobalSuppressions.cs" />
+    <Compile Include="Page\pageServerOneWayLogin.xaml.cs">
+      <DependentUpon>pageServerOneWayLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\pageServerOneWayLoginKeyCreate.xaml.cs">
+      <DependentUpon>pageServerOneWayLoginKeyCreate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Page\pageUserDelete.xaml.cs">
       <DependentUpon>pageUserDelete.xaml</DependentUpon>
     </Compile>
@@ -183,6 +189,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Page\pageServerOneWayLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page\pageServerOneWayLoginKeyCreate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Page\pageUserCreate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -256,6 +270,7 @@
     <None Include="DOWNLOAD\Version 1.0.0.0.zip" />
     <None Include="DOWNLOAD\Version 1.1.0.0.zip" />
     <None Include="DOWNLOAD\Version 2.1.0.0.zip" />
+    <None Include="DOWNLOAD\Version 2.2.0.0.zip" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -275,6 +290,21 @@
     <Resource Include="Resources\ServerTableScript.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="IMAGES\Version 2.2.0.0\DB-Table-Notebooks.PNG" />
+    <Resource Include="IMAGES\Version 2.2.0.0\DB-Table-Salt.PNG" />
+    <Resource Include="IMAGES\Version 2.2.0.0\DB-Table-Setting.PNG" />
+    <Resource Include="IMAGES\Version 2.2.0.0\DB-Table-User.PNG" />
+    <Resource Include="IMAGES\Version 2.2.0.0\DB-Tables.PNG" />
+    <Resource Include="IMAGES\Version 2.2.0.0\Notebook.PNG" />
+    <Resource Include="IMAGES\Version 2.2.0.0\NotebookExportImport.PNG" />
+    <Resource Include="IMAGES\Version 2.2.0.0\ServerConfigure.PNG" />
+    <Resource Include="IMAGES\Version 2.2.0.0\ServerCreateOneWayLoginKey.PNG" />
+    <Resource Include="IMAGES\Version 2.2.0.0\ServerLogin.PNG" />
+    <Resource Include="IMAGES\Version 2.2.0.0\ServerLoginOneWayLogin.PNG" />
+    <Resource Include="IMAGES\Version 2.2.0.0\UserCreate.PNG" />
+    <Resource Include="IMAGES\Version 2.2.0.0\UserDelete.PNG" />
+    <Resource Include="IMAGES\Version 2.2.0.0\UserHomeMenu.PNG" />
+    <Resource Include="IMAGES\Version 2.2.0.0\UserLogin.PNG" />
     <Resource Include="IMAGES\Version 2.1.0.0\DB-Table-Notebooks.PNG" />
     <Resource Include="IMAGES\Version 2.1.0.0\DB-Table-Salt.PNG" />
     <Resource Include="IMAGES\Version 2.1.0.0\DB-Table-Setting.PNG" />

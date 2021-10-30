@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.IO;
 
 namespace Encrypted_Notebook
 {
@@ -7,7 +8,10 @@ namespace Encrypted_Notebook
         public MainWindow()
         {
             InitializeComponent();
-            pageMirror.Content = new Page.pageServerLogin();
+            if (File.Exists("c2s_owl.gnm"))
+                pageMirror.Content = new Page.pageServerOneWayLogin();
+            else
+                pageMirror.Content = new Page.pageServerLogin();
         }
     }
 }

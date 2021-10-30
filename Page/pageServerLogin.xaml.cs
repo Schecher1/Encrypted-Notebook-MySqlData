@@ -8,15 +8,19 @@ namespace Encrypted_Notebook.Page
     {
         MainWindow mw = (MainWindow)Application.Current.MainWindow;
         DatabaseManager DBMgr = new DatabaseManager();
+        EncryptionManager EMgr = new EncryptionManager();
 
         public pageServerLogin()
         {
             InitializeComponent();
             msgBox_error.Visibility = Visibility.Hidden;
 
-            if (File.Exists("c2s"))
+            if (File.Exists("c2s_owl.gnm"))
+                mw.pageMirror.Content = new Page.pageServerOneWayLogin();
+
+            if (File.Exists("c2s.gnm"))
             {
-                string[] data = File.ReadAllLines("c2s");
+                string[] data = File.ReadAllLines("c2s.gnm");
                 tb_serverIP.Text = data[0];
                 tb_serverDatabase.Text = data[1];
                 tb_serverUsername.Text = data[2];
@@ -68,7 +72,9 @@ namespace Encrypted_Notebook.Page
                 tb_serverDatabase.Text,
                 tb_serverUsername.Text
             };
-            File.WriteAllLines("c2s", data);
+            File.WriteAllLines("c2s.gnm", data);
         }
+
+        private void bttn_owl_Click(object sender, RoutedEventArgs e) => mw.pageMirror.Content = new pageServerOneWayLoginKeyCreate();
     }
 }

@@ -24,6 +24,7 @@
         <TextBox x:Name="tb_serverIP" HorizontalAlignment="Center" Margin="170,0,0,0" VerticalAlignment="Center" FontSize="20" Width="230" Foreground="White" Background="#B2494949" Height="35"/>
         <Button x:Name="bttn_login" Content="Login" HorizontalAlignment="Center" Margin="0,0,0,25" VerticalAlignment="Bottom" Width="220" Height="65" Background="#B2494949" BorderBrush="#00707070" Foreground="White" FontSize="30" FontWeight="Bold" Click="bttn_login_Click"/>
         <TextBox x:Name="msgBox_error" HorizontalAlignment="Center" Margin="0,0,0,100" TextWrapping="Wrap" Text="Error Message" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="#00ABADB3" Foreground="Red" FontSize="15" IsReadOnly="True"/>
-        <Button x:Name="bttn_save" Content="Save" HorizontalAlignment="Center" Margin="340,420,0,0" VerticalAlignment="Center" Width="55" Height="26" Background="#00000000" BorderBrush="#00707070" Foreground="#FF5A71FF" FontSize="15" Click="bttn_save_Click"/>
+        <Button x:Name="bttn_save" Content="Save Login Data" HorizontalAlignment="Center" Margin="280,480,0,0" VerticalAlignment="Center" Width="113" Height="26" Background="#00000000" BorderBrush="#00707070" Foreground="#FF5A71FF" FontSize="15" Click="bttn_save_Click"/>
+        <Button x:Name="bttn_owl" Content="Create One Way Login" HorizontalAlignment="Center" Margin="240,420,0,0" VerticalAlignment="Center" Width="158" Height="26" Background="#00000000" BorderBrush="#00707070" Foreground="#FF5A71FF" FontSize="15" Click="bttn_owl_Click"/>
     </Grid>
 </Page>

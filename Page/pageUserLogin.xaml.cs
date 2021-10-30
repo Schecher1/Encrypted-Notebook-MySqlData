@@ -1,4 +1,5 @@
 ﻿using Encrypted_Notebook.Class;
+using System.IO;
 using System.Windows;
 
 namespace Encrypted_Notebook.Page
@@ -40,7 +41,10 @@ namespace Encrypted_Notebook.Page
         private void bttn_BackTo_Click(object sender, RoutedEventArgs e)
         {
             DBMgr.dbDisconnect();
-            mw.pageMirror.Content = new pageServerLogin();
+            if (File.Exists("c2s_owl.gnm"))
+                mw.pageMirror.Content = new pageServerOneWayLogin();
+            else
+                mw.pageMirror.Content = new pageServerLogin();
         }
     }
 }

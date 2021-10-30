@@ -38,8 +38,13 @@ Or [press here](https://github.com/Schecher1/Encrypted-Notebook/raw/master/DOWNL
 ### Server-Login:
 -If there is no password just leave it blank (I don't recommend this)                                                                 <br/>
 -The "Save" button saves everything except the password, because it will be saved unencrypted in a file (because of the security)     <br/>
-![Server-Login](IMAGES/Version%201.0.0.0/ServerLogin.PNG)
+![Server-Login](IMAGES/Version%202.2.0.0/ServerLogin.PNG)
 
+### Server-Login-OneWayLogin:                                                                                
+![Server-Configure](IMAGES/Version%202.2.0.0/ServerLoginOneWayLogin.PNG)
+
+### Server-Create-OneWayLoginKey:                                                                                   
+![Server-Configure](IMAGES/Version%202.2.0.0/ServerCreateOneWayLoginKey.PNG)	
 
 ### Server-Configure:
 -This appears only once when the database is new!                                                                                     <br/>

@@ -1,5 +1,8 @@
 ﻿﻿<h1>CHANGELOG</h1>
 
+## Version 2.2.0.0 
+-->A OneWayLogin system was created (for the database, as Connection File)           <br/>
+
 ## Version 2.1.0.0 
 -->There is now a User home menu                                                           <br/>
 -->You can now delete your own users from the system                                    <br/>
