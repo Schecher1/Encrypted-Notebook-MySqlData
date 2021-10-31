@@ -1,6 +1,7 @@
 ﻿using Encrypted_Notebook.Class;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -24,7 +25,6 @@ namespace Encrypted_Notebook.Page
 
             List<string> Notebooks = new List<string>();
             Notebooks = DBMgr.loadNotebooks();
-
             foreach (var notebook in Notebooks)
                 lb_notebooks.Items.Add(notebook);
         }
@@ -67,7 +67,7 @@ namespace Encrypted_Notebook.Page
 
         private void bttn_notesSave_Click(object sender, RoutedEventArgs e)
         {
-            DBMgr.writeNotes(tb_notes.Text);
+           DBMgr.writeNotes(tb_notes.Text);
         }
 
         private void bttn_BackTo_Click(object sender, RoutedEventArgs e) => mw.pageMirror.Content = new pageUserHome();

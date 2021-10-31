@@ -7,23 +7,31 @@ namespace Encrypted_Notebook.Class
     {
         public static string SplitByteArrayIntoString(byte[] saltArray)
         {
-            string saltString = "";
-            for (int i = 1; i <= saltArray.Length; i++)
+            try
             {
-                saltString += saltArray[i - 1].ToString() + "§";
+                string saltString = "";
+                for (int i = 1; i <= saltArray.Length; i++)
+                {
+                    saltString += saltArray[i - 1].ToString() + "§";
+                }
+                return saltString = saltString.Remove(saltString.Length - 1);
             }
-            return saltString = saltString.Remove(saltString.Length - 1);
+            catch {return null; }
         }
         public static byte[] SplitStringIntoByteArray(string saltString)
         {
-            byte[] saltByteArray;
-            string[] saltStringArray = saltString.Split('§');
-            List<byte> saltCache = new List<byte>();
+            try
+            {
+                byte[] saltByteArray;
+                string[] saltStringArray = saltString.Split('§');
+                List<byte> saltCache = new List<byte>();
 
-            for (int i = 0; i < saltStringArray.Length; i++)
-                saltCache.Add(Convert.ToByte(saltStringArray[i]));
+                for (int i = 0; i < saltStringArray.Length; i++)
+                    saltCache.Add(Convert.ToByte(saltStringArray[i]));
 
-            return saltByteArray = saltCache.ToArray();
+                return saltByteArray = saltCache.ToArray();
+            }
+            catch { return null; }
         }
     }
 }
