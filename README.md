@@ -83,7 +83,7 @@ Or [press here](https://github.com/Schecher1/Encrypted-Notebook/raw/master/DOWNL
 
 
 ### Database-Tables:
-![Database-Tables](IMAGES/Version%201.0.0.0/DB-Tables.PNG)
+![Database-Tables](IMAGES/Version%202.2.0.0/DB-Tables.PNG)
 
 
 ### Database-Notebooks:
