@@ -264,39 +264,45 @@ namespace Encrypted_Notebook.Class
             }
             return exportData;
         }
-        public void ImportAllNotebooks(string importPassword, List<string> importData)
+        public string ImportAllNotebooks(string importPassword, List<string> importData)
         {
-            byte[] salt = SplitManager.SplitStringIntoByteArray(importData[0]);
-            importData.RemoveAt(0);
-            string new_EncryptedNotebookValue = null, new_EncryptedNotebookName = null;
-
-            foreach (var notebook in importData)
+            try
             {
-                new_EncryptedNotebookName = null;
-                new_EncryptedNotebookValue = null;
+                byte[] salt = SplitManager.SplitStringIntoByteArray(importData[0]);
+                importData.RemoveAt(0);
+                string new_EncryptedNotebookValue = null, new_EncryptedNotebookName = null;
 
-                string[] _tmp = notebook.Split(':');
-
-                new_EncryptedNotebookName = 
-                    EMgr.EncryptAES256Salt(
-                        EMgr.DecryptAES256Salt(_tmp[0], importPassword, salt), 
-                        new NetworkCredential("", UserInfoManager.userPassword).Password, 
-                        UserInfoManager.userSalt);
-
-                if (_tmp[1] == "NULL")
-                    new_EncryptedNotebookValue = null;
-                else
+                foreach (var notebook in importData)
                 {
-                    new_EncryptedNotebookValue =
+                    new_EncryptedNotebookName = null;
+                    new_EncryptedNotebookValue = null;
+
+                    string[] _tmp = notebook.Split(':');
+
+                    new_EncryptedNotebookName =
                         EMgr.EncryptAES256Salt(
-                            EMgr.DecryptAES256Salt(_tmp[1], importPassword,salt),
+                            EMgr.DecryptAES256Salt(_tmp[0], importPassword, salt),
                             new NetworkCredential("", UserInfoManager.userPassword).Password,
                             UserInfoManager.userSalt);
-                }
 
-                cmd.CommandText = ($"INSERT INTO notebooks (`notebook_Owner`, `notebook_Name`, `notebook_Value`) VALUES ('{UserInfoManager.userID}', '{new_EncryptedNotebookName}', '{new_EncryptedNotebookValue}');");
-                cmd.ExecuteNonQuery();
+                    if (_tmp[1] == "NULL")
+                        new_EncryptedNotebookValue = null;
+                    else
+                    {
+                        new_EncryptedNotebookValue =
+                            EMgr.EncryptAES256Salt(
+                                EMgr.DecryptAES256Salt(_tmp[1], importPassword, salt),
+                                new NetworkCredential("", UserInfoManager.userPassword).Password,
+                                UserInfoManager.userSalt);
+                    }
+
+                    cmd.CommandText = ($"INSERT INTO notebooks (`notebook_Owner`, `notebook_Name`, `notebook_Value`) VALUES ('{UserInfoManager.userID}', '{new_EncryptedNotebookName}', '{new_EncryptedNotebookValue}');");
+                    cmd.ExecuteNonQuery();
+                    return "";
+                }
             }
+            catch { return null; }
+            return null;
         }
     }
 }

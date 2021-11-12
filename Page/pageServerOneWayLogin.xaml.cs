@@ -18,20 +18,28 @@ namespace Encrypted_Notebook.Page
 
         private void bttn_login_Click(object sender, RoutedEventArgs e)
         {
-            string[] _data = File.ReadAllLines("c2s_owl.gnm");
-            byte[] salt = SplitManager.SplitStringIntoByteArray(_data[0]);
-            string[] loginData = EMgr.DecryptAES256Salt(_data[1],tb_filePassword.Password,salt).Split(':');
-
-            DBMgr.connectionString(loginData[0], loginData[1], loginData[2], loginData[3]);
-
-            if (DBMgr.dbConnect() == "successfully connected to the database!")
+            try
             {
-                if (DBMgr.checkIfServerIsConfigured() == 1)
-                    mw.pageMirror.Content = new pageUserLogin();
+                string[] _data = File.ReadAllLines("c2s_owl.gnm");
+                byte[] salt = SplitManager.SplitStringIntoByteArray(_data[0]);
+                string[] loginData = EMgr.DecryptAES256Salt(_data[1], tb_filePassword.Password, salt).Split(':');
+
+                DBMgr.connectionString(loginData[0], loginData[1], loginData[2], loginData[3]);
+
+                if (DBMgr.dbConnect() == "successfully connected to the database!")
+                {
+                    if (DBMgr.checkIfServerIsConfigured() == 1)
+                        mw.pageMirror.Content = new pageUserLogin();
+                    else
+                        mw.pageMirror.Content = new pageServerConfigure();
+                }
                 else
-                    mw.pageMirror.Content = new pageServerConfigure();
+                {
+                    msgBox_error.Text = ("No connection could be established");
+                    msgBox_error.Visibility = Visibility.Visible;
+                }
             }
-            else
+            catch
             {
                 msgBox_error.Text = ("No connection could be established");
                 msgBox_error.Visibility = Visibility.Visible;

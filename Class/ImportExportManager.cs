@@ -29,8 +29,10 @@ namespace Encrypted_Notebook.Class
             string[] _tmp = File.ReadAllLines(importPath);
             for (int i = 1; i <= _tmp.Length; i++)
                 importData.Add(_tmp[i - 1]);
-            DBMgr.ImportAllNotebooks(importPassword, importData);
-            MessageBox.Show("The import was successful, all notebooks should be available.", "The import was successful", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (DBMgr.ImportAllNotebooks(importPassword, importData) == null)
+                MessageBox.Show("The import was NOT successful, maybe the password is wrong.", "The import was NOT successful", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+                MessageBox.Show("The import was successful, all notebooks should be available.", "The import was successful", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
