@@ -1,5 +1,8 @@
 ﻿﻿<h1>CHANGELOG</h1>
 
+## Version 2.2.2.0 
+-->An import bug was fixed (not all notebooks were always imported)                     <br/>
+
 ## Version 2.2.0.0 
 -->A OneWayLogin system was created (for the database, as Connection File)           <br/>
 

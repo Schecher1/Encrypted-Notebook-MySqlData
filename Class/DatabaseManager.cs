@@ -259,11 +259,10 @@ namespace Encrypted_Notebook.Class{
 
                     cmd.CommandText = ($"INSERT INTO notebooks (`notebook_Owner`, `notebook_Name`, `notebook_Value`) VALUES ('{UserInfoManager.userID}', '{new_EncryptedNotebookName}', '{new_EncryptedNotebookValue}');");
                     cmd.ExecuteNonQuery();
-                    return "";
                 }
+                return "";
             }
             catch { return null; }
-            return null;
-        }
+         }
     }
 }
