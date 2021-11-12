@@ -1,12 +1,9 @@
 ﻿using System.Windows;
 using Encrypted_Notebook.Class;
 
-namespace Encrypted_Notebook.Page
-{
-    public partial class pageUserHome
-    {
-        public pageUserHome()
-        {
+namespace Encrypted_Notebook.Page{
+    public partial class pageUserHome{
+        public pageUserHome(){
             if (UserInfoManager.userID == -1)
                 return;
             InitializeComponent();
