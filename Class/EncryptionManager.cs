@@ -57,7 +57,8 @@ namespace Encrypted_Notebook.Class
         }
         public string DecryptAES256Salt(string input, string password, byte[] salt)
         {
-            try{
+            try
+            {
                 // Get the bytes of the string
                 byte[] bytesToBeDecrypted = Convert.FromBase64String(input);
                 byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
@@ -74,7 +75,8 @@ namespace Encrypted_Notebook.Class
 
         private byte[] AES256_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes, byte[] salt)
         {
-            try{
+            try
+            {
                 byte[] encryptedBytes = null;
 
                 using (MemoryStream ms = new MemoryStream()){
@@ -88,7 +90,8 @@ namespace Encrypted_Notebook.Class
 
                         AES.Mode = CipherMode.CBC;
 
-                        using (var cs = new CryptoStream(ms, AES.CreateEncryptor(), CryptoStreamMode.Write)){
+                        using (var cs = new CryptoStream(ms, AES.CreateEncryptor(), CryptoStreamMode.Write))
+                        {
                             cs.Write(bytesToBeEncrypted, 0, bytesToBeEncrypted.Length);
                             cs.Close();
                         }
@@ -101,7 +104,8 @@ namespace Encrypted_Notebook.Class
         }
         private byte[] AES256_Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes, byte[] salt)
         {
-            try{
+            try
+            {
                 byte[] decryptedBytes = null;
 
                 using (MemoryStream ms = new MemoryStream()){

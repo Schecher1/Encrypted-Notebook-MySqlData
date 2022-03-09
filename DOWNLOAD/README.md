@@ -1,5 +1,10 @@
 ﻿﻿<h1>CHANGELOG</h1>
 
+## Version 2.3.0.0 
+-->I had planned to switch to EF,                                                            <br/>
+    but I didn't because of a few reasons.                                                   <br/>        
+    That' s why everything is back to the old.                                               <br/>
+
 ## Version 2.2.2.0 
 -->An import bug was fixed (not all notebooks were always imported)                     <br/>
 

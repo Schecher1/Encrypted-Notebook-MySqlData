@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Encrypted_Notebook.Class{
-    class SplitManager{
+namespace Encrypted_Notebook.Class
+{
+    class SplitManager
+    {
         public static string SplitByteArrayIntoString(byte[] saltArray)
         {
-            try{
+            try
+            {
                 string saltString = "";
                 for (int i = 1; i <= saltArray.Length; i++)
                 {
@@ -17,7 +20,8 @@ namespace Encrypted_Notebook.Class{
         }
         public static byte[] SplitStringIntoByteArray(string saltString)
         {
-            try{
+            try
+            {
                 byte[] saltByteArray;
                 string[] saltStringArray = saltString.Split('§');
                 List<byte> saltCache = new List<byte>();

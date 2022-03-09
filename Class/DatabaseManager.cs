@@ -38,7 +38,8 @@ namespace Encrypted_Notebook.Class
         }
         public string dbDisconnect()
         {
-            try{
+            try
+            {
                 con.Close();
             }
             catch (Exception ex){
@@ -55,7 +56,8 @@ namespace Encrypted_Notebook.Class
         public int checkIfUserExist(string userName)
         {
             cmd.CommandText = ($"SELECT user_Username FROM user WHERE (user_Username = '{userName}')");
-            try{
+            try
+            {
                 if (cmd.ExecuteScalar().ToString() == userName)
                     return 1;
                 else
@@ -66,7 +68,8 @@ namespace Encrypted_Notebook.Class
         public int checkIfServerIsConfigured()
         {
             cmd.CommandText = ("SELECT setting_Value FROM setting WHERE (setting_Name = 'IsConfigured');");
-            try{
+            try
+            {
                 cmd.ExecuteScalar();
                 return 1;
             }
@@ -74,7 +77,8 @@ namespace Encrypted_Notebook.Class
         }
         public int ConfiguredServer()
         {
-            try{
+            try
+            {
                 cmd.CommandText = SQL.ServerTableScript;
                 cmd.ExecuteNonQuery();
                 return 1;
@@ -103,7 +107,8 @@ namespace Encrypted_Notebook.Class
         public bool loginUser(string userName, string userPassword)
         {
             cmd.CommandText = ($"SELECT user_ID FROM user WHERE (user_Username = '{userName}' and user_Password = '{EMgr.GetHash_SHA512(userPassword)}');");
-            if (Convert.ToInt32(cmd.ExecuteScalar()) != 0){
+            if (Convert.ToInt32(cmd.ExecuteScalar()) != 0)
+            {
                 cmd.CommandText = ($"SELECT user_ID FROM user WHERE (user_Username = '{userName}' and user_Password = '{EMgr.GetHash_SHA512(userPassword)}');");
 
                 UserInfoManager.userName = userName.ToLower();
