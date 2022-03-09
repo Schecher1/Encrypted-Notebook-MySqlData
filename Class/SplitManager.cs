@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace Encrypted_Notebook.Class{
     class SplitManager{
-        public static string SplitByteArrayIntoString(byte[] saltArray){
+        public static string SplitByteArrayIntoString(byte[] saltArray)
+        {
             try{
                 string saltString = "";
                 for (int i = 1; i <= saltArray.Length; i++)
@@ -14,7 +15,8 @@ namespace Encrypted_Notebook.Class{
             }
             catch {return null; }
         }
-        public static byte[] SplitStringIntoByteArray(string saltString){
+        public static byte[] SplitStringIntoByteArray(string saltString)
+        {
             try{
                 byte[] saltByteArray;
                 string[] saltStringArray = saltString.Split('§');
