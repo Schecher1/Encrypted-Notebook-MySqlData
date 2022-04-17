@@ -26,7 +26,7 @@ will be automatically set up for you and then you can directly create a user.
 ## How to Download:
 
 Go to the "DOWNLOAD" folder and download any version (for security the latest one). 
-Or [press here](https://github.com/Schecher1/Encrypted-Notebook/raw/master/DOWNLOAD/Latest%20Version.zip) to download if you want the latest one
+Or [press here](https://github.com/Schecher1/Encrypted-Notebook-RawSQL/raw/master/DOWNLOAD/Latest%20Version.zip) to download if you want the latest one
 
 
 ## Features:
