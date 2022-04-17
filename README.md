@@ -1,4 +1,6 @@
-﻿﻿<h1>Encrypted Notebook (written in WPF C#)</h1>
+<h1>Archive Reason: It still works, but it is using "MySqlData" and not "Entity-Framework"!</h1>
+
+<h1>Encrypted Notebook (written in WPF C#)  </h1>
 
 ## Important Info!
 This is a project of mine, which I have released for further 
